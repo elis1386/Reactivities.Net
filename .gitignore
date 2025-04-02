@@ -431,6 +431,8 @@ test-results/
 .DS_Store
 .AppleDouble
 .LSOverride
+.vscode
+.config
 
 # Icon must end with two \r
 Icon
