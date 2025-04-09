@@ -11,9 +11,14 @@ import { Activity } from "../../../types/activity";
 type Props = {
   activity: Activity;
   cancelSelectedActivity: () => void;
+  openForm: (id: string) => void;
 };
 
-const ActivityDetail = ({ activity, cancelSelectedActivity }: Props) => {
+const ActivityDetail = ({
+  activity,
+  cancelSelectedActivity,
+  openForm,
+}: Props) => {
   return (
     <Card sx={{ borderRadius: 3, mr: 3 }}>
       <CardMedia
@@ -28,7 +33,9 @@ const ActivityDetail = ({ activity, cancelSelectedActivity }: Props) => {
         <Typography variant="body1">{activity.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button color="primary">Edit</Button>
+        <Button color="primary" onClick={() => openForm(activity.id)}>
+          Edit
+        </Button>
         <Button color="inherit" onClick={cancelSelectedActivity}>
           Cancel
         </Button>

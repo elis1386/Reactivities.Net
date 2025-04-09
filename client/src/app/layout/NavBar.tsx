@@ -8,7 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 
-const NavBar = () => {
+type Props = {
+  openForm: () => void;
+};
+
+const NavBar = ({ openForm }: Props) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#182a73" }}>
@@ -50,7 +54,12 @@ const NavBar = () => {
               Contact
             </MenuItem>
           </Box>
-          <Button size="large" variant="contained" color="warning">
+          <Button
+            size="large"
+            variant="contained"
+            color="warning"
+            onClick={openForm}
+          >
             Create activity
           </Button>
         </Toolbar>
