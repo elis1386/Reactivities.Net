@@ -1,67 +1,25 @@
 import { Group } from "@mui/icons-material";
-import {
-  AppBar,
-  Box,
-  Button,
-  MenuItem,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import MenuItemLink from "../shared/components/MenuItemLink";
 
-type Props = {
-  openForm: () => void;
-};
-
-const NavBar = ({ openForm }: Props) => {
+const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#182a73" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#0658a0" }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
-            <MenuItem sx={{ display: "flex", gap: 2 }}>
+            <MenuItemLink to="/">
               <Group fontSize="large" />
               <Typography variant="h6" fontWeight="bold">
                 ReActivities
               </Typography>
-            </MenuItem>
+            </MenuItemLink>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <MenuItem
-              sx={{
-                fontSize: "1rem",
-                textTransform: "uppercase",
-                fontWeight: "bold",
-              }}
-            >
-              Activities
-            </MenuItem>
-            <MenuItem
-              sx={{
-                fontSize: "1rem",
-                textTransform: "uppercase",
-                fontWeight: "bold",
-              }}
-            >
-              About
-            </MenuItem>
-            <MenuItem
-              sx={{
-                fontSize: "1rem",
-                textTransform: "uppercase",
-                fontWeight: "bold",
-              }}
-            >
-              Contact
-            </MenuItem>
+            <MenuItemLink to="/activities">Activities</MenuItemLink>
+            <MenuItemLink to="/createActivity">Create activity</MenuItemLink>
           </Box>
-          <Button
-            size="large"
-            variant="contained"
-            color="warning"
-            onClick={openForm}
-          >
-            Create activity
-          </Button>
+          <MenuItemLink to="/user">User menu</MenuItemLink>
         </Toolbar>
       </AppBar>
     </Box>

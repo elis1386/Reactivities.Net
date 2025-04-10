@@ -1,22 +1,19 @@
 import { Box, Button, Paper, Typography, TextField } from "@mui/material";
-import { Activity } from "../../../types/activity";
+import { Activity } from "../../../../types/activity";
 import { FormEvent } from "react";
-import { useActivities } from "../../../hooks/useActivities";
+import { useActivities } from "../../../../hooks/useActivities";
+import { useNavigate, useParams } from "react-router";
 
-type Props = {
-  activity?: Activity;
-  closeForm: () => void;
-};
-
-const ActivityForm = ({ activity, closeForm }: Props) => {
-  const { updateActivity, createActivity } = useActivities();
+const ActivityForm = () => {
+  const { id } = useParams();
+  const { updateActivity, createActivity, activity, isLoadingActivity } = useActivities(id);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const formDate = new FormData(event.currentTarget);
-
     const data: { [key: string]: FormDataEntryValue } = {};
+
     formDate.forEach((value, key) => {
       data[key] = value;
     });
@@ -24,16 +21,21 @@ const ActivityForm = ({ activity, closeForm }: Props) => {
     if (activity) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
+      navigate(`/activities/${activity.id}`);
     } else {
-      await createActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
+      createActivity.mutate(data as unknown as Activity, {
+        onSuccess: (id) => {
+          navigate(`/activities/${id}`);
+        },
+      });
     }
   };
+  if (isLoadingActivity) return <Typography>Loading activity from</Typography>;
+
   return (
-    <Paper sx={{ borderRadius: 3, mr: 3, padding: 3 }}>
+    <Paper sx={{ borderRadius: 3, width: "50%", minWidth: "350px", margin: "2rem auto", p: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
-        Create activity
+        {activity ? "Edit activity" : "Create activity"}
       </Typography>
       <Box component="form" onSubmit={handleSubmit} display="flex" flexDirection="column" gap={3}>
         <TextField variant="outlined" label="Title" defaultValue={activity?.title} name="title" />
@@ -59,9 +61,7 @@ const ActivityForm = ({ activity, closeForm }: Props) => {
         <TextField label="City" variant="outlined" defaultValue={activity?.city} name="city" />
         <TextField label="Venue" variant="outlined" name="venue" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={3}>
-          <Button color="inherit" onClick={closeForm}>
-            Cancel
-          </Button>
+          <Button color="inherit">Cancel</Button>
           <Button
             color="success"
             type="submit"
