@@ -8,6 +8,10 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

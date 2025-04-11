@@ -33,7 +33,7 @@ const ActivityForm = () => {
   if (isLoadingActivity) return <Typography>Loading activity from</Typography>;
 
   return (
-    <Paper sx={{ borderRadius: 3, width: "50%", minWidth: "350px", margin: "2rem auto", p: 3 }}>
+    <Paper sx={{ borderRadius: 3, m: "1rem auto", p: 3, width: "50%" }}>
       <Typography variant="h5" gutterBottom color="primary">
         {activity ? "Edit activity" : "Create activity"}
       </Typography>

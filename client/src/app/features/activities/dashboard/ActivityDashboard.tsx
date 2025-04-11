@@ -1,13 +1,17 @@
 import { Grid } from "@mui/material";
 import ActivityList from "./ActivityList";
+import ActivityFilters from "../dashboard/ActivityFilters";
 
 const ActivityDashboard = () => {
   return (
-    <Grid container sx={{ mt: 2 }}>
-      <Grid size={7}>
+    <Grid container sx={{ m: 2 }}>
+      <Grid size={8}>
         <ActivityList />
       </Grid>
-      <Grid size={5}>Activity filters go here</Grid>
+      <Grid size={4}>
+        {" "}
+        <ActivityFilters />
+      </Grid>
     </Grid>
   );
 };
