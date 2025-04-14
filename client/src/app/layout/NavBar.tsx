@@ -1,8 +1,11 @@
 import { Group } from "@mui/icons-material";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, LinearProgress, Toolbar, Typography } from "@mui/material";
 import MenuItemLink from "../shared/components/MenuItemLink";
+import { useStore } from "../../hooks/useStore";
+import { Observer } from "mobx-react-lite";
 
 const NavBar = () => {
+  const { uiStore } = useStore();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -24,6 +27,22 @@ const NavBar = () => {
           </Box>
           <MenuItemLink to="/user">User menu</MenuItemLink>
         </Toolbar>
+        <Observer>
+          {() =>
+            uiStore.isLodaing ? (
+              <LinearProgress
+                color="secondary"
+                sx={{
+                  position: "top",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 4,
+                }}
+              />
+            ) : null
+          }
+        </Observer>
       </AppBar>
     </Box>
   );
