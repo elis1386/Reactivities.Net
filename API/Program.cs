@@ -25,13 +25,13 @@ builder.Services.AddMediatR(x =>
 );
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
-builder.Services.AddTransient<ExeptionMiddleware>();
+builder.Services.AddTransient<ExceptionMiddleware>();
 var app = builder.Build();
 
 app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
-app.UseMiddleware<ExeptionMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(opt =>
     opt.AllowAnyHeader()
         .AllowAnyMethod()
