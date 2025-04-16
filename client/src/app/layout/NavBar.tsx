@@ -24,6 +24,7 @@ const NavBar = () => {
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <MenuItemLink to="/activities">Activities</MenuItemLink>
             <MenuItemLink to="/createActivity">Create activity</MenuItemLink>
+            <MenuItemLink to="/errors">Errors</MenuItemLink>
           </Box>
           <MenuItemLink to="/user">User menu</MenuItemLink>
         </Toolbar>
