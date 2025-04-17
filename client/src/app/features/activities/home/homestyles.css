@@ -1,0 +1,19 @@
+@keyframes floatFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.6) translateZ(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1) translateZ(-30px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translateZ(-60px);
+  }
+}
+
+.floating-img {
+  animation: floatFadeIn 4s ease-out forwards;
+  object-fit: cover;
+}
