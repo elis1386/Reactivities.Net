@@ -1,9 +1,8 @@
 
-using Application.Activities.DTO;
+using Application.Activities.DTOs;
 using Application.Core;
 using AutoMapper;
 using Domain;
-using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -24,7 +23,9 @@ public class CreateActivity
             context.Activities.Add(activity);
 
             var result = await context.SaveChangesAsync(cancellationToken) > 0;
+
             if (!result) return Result<string>.Failure("Failure create activity", 400);
+
             return Result<string>.Success(activity.Id);
         }
     }

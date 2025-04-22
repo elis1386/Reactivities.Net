@@ -1,6 +1,4 @@
-using System;
-
-namespace Application.Activities.DTO;
+namespace Application.Activities.DTOs;
 
 public class BaseActivityDTO
 {

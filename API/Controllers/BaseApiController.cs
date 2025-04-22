@@ -8,9 +8,9 @@ namespace API.Controllers
     [ApiController]
     public class BaseApiController : ControllerBase
     {
-        private IMediator? _mediotor;
+        private IMediator? _mediator;
         protected IMediator Mediator =>
-            _mediotor ??= HttpContext.RequestServices.GetService<IMediator>()
+            _mediator ??= HttpContext.RequestServices.GetService<IMediator>()
             ?? throw new InvalidOperationException("IMediator service is unavailable") ?? throw new InvalidOperationException("IMediator service is unavailable");
         protected ActionResult HandleResult<T>(Result<T> result)
         {

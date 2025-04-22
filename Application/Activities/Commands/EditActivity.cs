@@ -1,7 +1,6 @@
-using Application.Activities.DTO;
+using Application.Activities.DTOs;
 using Application.Core;
 using AutoMapper;
-using Domain;
 using MediatR;
 using Persistence;
 
@@ -18,11 +17,15 @@ public class EditActivity
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
             var activity = await context.Activities.FindAsync([request.ActivityDTO.Id], cancellationToken);
+
             if (activity == null) return Result<Unit>.Failure("Activity not found", 404);
 
             mapper.Map(request.ActivityDTO, activity);
+
             var result = await context.SaveChangesAsync(cancellationToken) > 0;
-            if (!result) return Result<Unit>.Failure("Failure edit activity", 400);
+
+            if (!result) return Result<Unit>.Failure("Failure update activity", 400);
+
             return Result<Unit>.Success(Unit.Value);
         }
     }
